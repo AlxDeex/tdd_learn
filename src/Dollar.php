@@ -13,7 +13,7 @@ class Dollar
     /**
      * @var int
      */
-    public $amount = 0;
+    private $amount = 0;
 
     /**
      * Dollar constructor.
@@ -38,7 +38,7 @@ class Dollar
      * @param Dollar $object
      * @return bool
      */
-    public function equals($object): bool
+    public function equals(Dollar $object): bool
     {
         return $this->amount === $object->amount;
     }
