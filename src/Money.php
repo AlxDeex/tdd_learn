@@ -8,7 +8,7 @@ namespace App;
  * Class Money
  * @package App
  */
-abstract class Money
+class Money
 {
 
     /**
@@ -38,7 +38,7 @@ abstract class Money
      */
     public function equals(Money $object): bool
     {
-        return $this->amount === $object->amount && get_class($this) == get_class($object);
+        return $this->amount === $object->amount && $this->currency == $object->currency;
     }
 
     /**
@@ -50,10 +50,14 @@ abstract class Money
     }
 
     /**
+     * Return new Money object multiplied on $multiplier
      * @param int $multiplier
      * @return Money
      */
-    abstract public function times(int $multiplier): Money;
+    public function times(int $multiplier): Money
+    {
+        return new Money($this->amount * $multiplier, $this->currency);
+    }
 
     /**
      * @param int $amount
@@ -61,7 +65,7 @@ abstract class Money
      */
     public static function dollar(int $amount): Money
     {
-        return new Dollar($amount, 'USD');
+        return new Money($amount, 'USD');
     }
 
     /**
@@ -70,6 +74,6 @@ abstract class Money
      */
     public static function franc(int $amount): Money
     {
-        return new Franc($amount, 'CHF');
+        return new Money($amount, 'CHF');
     }
 }
