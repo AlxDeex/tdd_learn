@@ -78,11 +78,13 @@ class Money implements Expression
 
     /**
      * @param string $to
+     * @param Bank $bank
      * @return $this
      */
-    public function reduce(string $to): Money
+    public function reduce(Bank $bank, string $to): Money
     {
-        return $this;
+        $amount = $this->amount / $bank->rate($this->currency, $to);
+        return new Money($amount, $to);
     }
 
     /**
