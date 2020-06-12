@@ -8,7 +8,7 @@ namespace App;
  * Class Money
  * @package App
  */
-class Money
+class Money implements Expression
 {
 
     /**
@@ -57,6 +57,15 @@ class Money
     public function times(int $multiplier): Money
     {
         return new Money($this->amount * $multiplier, $this->currency);
+    }
+
+    /**
+     * @param Money $added
+     * @return Expression
+     */
+    public function plus(Money $added): Expression
+    {
+        return new Money($this->amount + $added->amount, $this->currency);
     }
 
     /**
