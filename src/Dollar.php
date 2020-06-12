@@ -8,21 +8,8 @@ namespace App;
  * Class Dollar
  * @package App
  */
-class Dollar
+class Dollar extends Money
 {
-    /**
-     * @var int
-     */
-    private $amount = 0;
-
-    /**
-     * Dollar constructor.
-     * @param int $amount
-     */
-    public function __construct(int $amount)
-    {
-        $this->amount = $amount;
-    }
 
     /**
      * Return new Dollar object multiplied on $multiplier
@@ -32,15 +19,6 @@ class Dollar
     public function times(int $multiplier): Dollar
     {
         return new Dollar($this->amount * $multiplier);
-    }
-
-    /**
-     * @param Dollar $object
-     * @return bool
-     */
-    public function equals(Dollar $object): bool
-    {
-        return $this->amount === $object->amount;
     }
 
 }
