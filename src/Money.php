@@ -14,12 +14,12 @@ class Money implements Expression
     /**
      * @var int
      */
-    protected $amount = 0;
+    private $amount = 0;
 
     /**
      * @var string|null
      */
-    protected $currency = null;
+    private $currency = null;
 
     /**
      * Money constructor.
@@ -65,7 +65,24 @@ class Money implements Expression
      */
     public function plus(Money $added): Expression
     {
-        return new Money($this->amount + $added->amount, $this->currency);
+        return new Sum($this, $added);
+    }
+
+    /**
+     * @return int
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * @param string $to
+     * @return $this
+     */
+    public function reduce(string $to): Money
+    {
+        return $this;
     }
 
     /**

@@ -11,13 +11,13 @@ namespace App;
 class Bank
 {
     /**
-     * @param Expression $sum
-     * @param string $currency
+     * @param Expression $source
+     * @param string $to
      * @return Money
      */
-    public function reduce(Expression $sum, string $currency): Money
+    public function reduce(Expression $source, string $to): Money
     {
-        return Money::dollar(10);
+        return $source->reduce($to);
     }
 
 }
