@@ -73,4 +73,14 @@ class MoneyTest extends TestCase
         $result = $bank->reduce(Money::franc(2), 'USD');
         $this->assertEquals(Money::dollar(1), $result);
     }
+
+    public function testMixedAddition()
+    {
+        $fiveBucks = Money::dollar(5);
+        $tenFrancs = Money::franc(10);
+        $bank = new Bank();
+        $bank->addRate('CHF', 'USD', 2);
+        $result = $bank->reduce($fiveBucks->plus($tenFrancs), 'USD');
+        $this->assertEquals(Money::dollar(10), $result);
+    }
 }
