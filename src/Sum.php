@@ -37,15 +37,28 @@ class Sum implements Expression
      */
     public function reduce(Bank $bank, string $to): Money
     {
-        $augend = $this->augend->reduce($bank, $this->augend->currency())->getAmount();
-        $addend = $this->addend->reduce($bank, $this->augend->currency())->getAmount();
+        $augend = $this->augend->reduce($bank, $to)->getAmount();
+        $addend = $this->addend->reduce($bank, $to)->getAmount();
 
         return new Money($augend + $addend, $to);
     }
 
+    /**
+     * @param Money $added
+     * @return Expression
+     */
     public function plus(Money $added): Expression
     {
-        // TODO: Implement plus() method.
+        return new Sum($this, $added);
+    }
+
+    /**
+     * @param int $multiplier
+     * @return Expression
+     */
+    public function times(int $multiplier): Expression
+    {
+        return new Sum($this->augend->times($multiplier), $this->addend->times($multiplier));
     }
 
 }
